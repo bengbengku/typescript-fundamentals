@@ -1,5 +1,6 @@
 //Decorators
 function Logger(logString: string) {
+  console.log('LOGGER FACTORY');
   return function (constructor: Function) {
     console.log(logString);
     console.log(constructor);
@@ -8,7 +9,9 @@ function Logger(logString: string) {
 
 //decorator factories
 function WithTemplate(template: string, hookId: string) {
+  console.log('TEMPLATE FACTORY');
   return function (constructor: any) {
+    console.log('rendering template...');
     const hookEl = document.getElementById(hookId);
     const p = new constructor();
     if (hookEl) {
@@ -18,7 +21,7 @@ function WithTemplate(template: string, hookId: string) {
   };
 }
 
-// @Logger('LOGGING - PERSON')
+@Logger('LOGGING - PERSON')
 @WithTemplate('<h1>My person object..</h1>', 'app')
 class PersonDecorator {
   name = 'Benget';
